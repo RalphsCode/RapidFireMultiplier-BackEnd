@@ -128,7 +128,9 @@ router.patch("/:username", async (req, res, next) => {
       return res.status(404).json({ error: "User not found" });
     }
 
+    // Returns the user_id
     return res.json({ user });
+
   } catch (err) {
     return next(err);
   }

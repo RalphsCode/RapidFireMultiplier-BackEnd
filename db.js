@@ -1,16 +1,16 @@
-
-
-/** Database setup for users. */
-
-const { Client } = require("pg");
+require("dotenv").config(); // Load environment variables from .env file
 
 let DB_URI;
 
 if (process.env.NODE_ENV === "test") {
-  DB_URI = "postgresql://postgres.umfzfgwofyclooimlqpn:x6ESeLocNtfWSlxE@aws-0-us-west-1.pooler.supabase.com:5432/postgres";
+  DB_URI = process.env.TEST_DB_URI;
 } else {
-  DB_URI = "postgresql://postgres.umfzfgwofyclooimlqpn:x6ESeLocNtfWSlxE@aws-0-us-west-1.pooler.supabase.com:5432/postgres";
+  DB_URI = process.env.DATABASE_URL;
 }
+
+/** Database setup for users. */
+
+const { Client } = require("pg");
 
 let db = new Client({
   connectionString: DB_URI
