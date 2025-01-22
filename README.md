@@ -1,10 +1,17 @@
 # Backend for the Rapid Fire Multiplication Game
 
-To run: \n
-    npx nodemon \n\n
+To run:  
+    npm install
+    npx nodemon  
 
-Runs on Localhost port 3001.\n
-Connects to 'rapidfiremultiplier' database.
+Development runs on Localhost port 3001.  
+  
+  Production is running on Render:  
+https://rapidfiremultiplier-backend.onrender.com  
+  
+  Connects to 'rapidfiremultiplier' database.  
+    
+    Production database is on SupaBase.
 
 # There are 3 Route Directories:
 data - which post and retrieve a user's game details/scores \n
