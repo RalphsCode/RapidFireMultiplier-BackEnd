@@ -41,8 +41,8 @@ CREATE TABLE scores (
 -- Seed data for users table
 -- all seed passwords are "Test123!"
 INSERT INTO users (username, first_name, last_name, email, password_hash, curr_hi_score, total_points) VALUES
-('Guest', 'Guest', 'CatchAll', 'guest@none.com', '$2b$10$xou1vL88wnq4TpQN48cQAuPi7rd340HDcweAJUS8L4dh0gS', 80, 180),
-('Test', 'Test', 'User', 'test@test.com', '$2b$10$xou1vL88wnq4TpQN48cQAuPi7rd340HDcweAJUS8L4dh0gS', 100, 100);
+('Guest', 'Guest', 'CatchAll', 'guest@none.com', '$2b$10$7ePa6D8LrlSoZUXBpJCHOeDfCnr3o4x.6f96HHkSdRv8Qyr3bTzwW', 80, 180),
+('Test', 'Test', 'User', 'test@test.com', '$2b$10$7ePa6D8LrlSoZUXBpJCHOeDfCnr3o4x.6f96HHkSdRv8Qyr3bTzwW', 100, 100);
 
 -- Seed data for scores table
 INSERT INTO scores (user_id, q_and_a, score, curr_hi_score, total_points, timestamp, difficulty) VALUES
