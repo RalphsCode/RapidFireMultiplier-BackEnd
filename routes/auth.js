@@ -3,6 +3,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const db = require("../db"); // Import database connection
+const validatePassword = require("../validatePassword");
 const router = new express.Router();
 
 /** =========================
@@ -27,8 +28,13 @@ router.post("/login", async (req, res, next) => {
   try {
     const { username, password } = req.body;
 
+    // Validate input & password requirements
     if (!username || !password) {
       return res.status(400).json({ error: "Username and password are required." });
+    } else if (!validatePassword(password)) {
+      return res.status(400).json({
+        error: "Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a number, and a special character.",
+      });
     }
 
     // Query the database for the user
@@ -43,14 +49,14 @@ router.post("/login", async (req, res, next) => {
 
     // Check if the user exists
     if (!user) {
-      return res.status(400).json({ error: "Invalid Username or password." });
+      return res.status(400).json({ error: "Invalid Username." });
     }
 
     // Compare provided password with hashed password
     const isValidPassword = await bcrypt.compare(password, user.password_hash);
 
     if (!isValidPassword) {
-      return res.status(400).json({ error: "Invalid username or Password." });
+      return res.status(400).json({ error: "Invalid Password." });
     }
 
     const outObj = {username: user.username, 
@@ -99,9 +105,13 @@ router.post("/register", async (req, res, next) => {
     try {
       const { username, first_name, last_name, email, password } = req.body;
   
-      // Validate input
+      // Validate input & password requirements
       if (!username || !first_name || !last_name || !email || !password) {
         return res.status(400).json({ error: "All fields are required." });
+      } else if (!validatePassword(password)) {
+        return res.status(400).json({
+          error: "Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a number, and a special character.",
+        });
       }
   
       // Check if username or email already exists
